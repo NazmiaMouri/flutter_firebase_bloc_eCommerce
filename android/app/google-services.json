@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "593396642309",
+    "project_id": "al-maequl",
+    "storage_bucket": "al-maequl.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:593396642309:android:7431c9caeb50998e5be26c",
+        "android_client_info": {
+          "package_name": "com.example.flutter_firebase_ecommerce"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3NfomzUz4KV3_Y9WRvxYqRm95lpkpl2k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
