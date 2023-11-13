@@ -1,31 +1,20 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_ecommerce/auth/otp.dart';
 import 'package:flutter_firebase_ecommerce/widgets/debug_print.dart';
 
-class Login extends StatelessWidget {
-  const Login({super.key});
+class LoginWithPhoneNumber extends StatelessWidget {
+  const LoginWithPhoneNumber({super.key});
 
   @override
   Widget build(BuildContext context) {
     final TextEditingController phoneNumber = TextEditingController();
     final TextEditingController password = TextEditingController();
 
-    void signInAnonymously() async {
-      try {
-        final userCredential = await FirebaseAuth.instance.signInAnonymously();
-        DebugPrint("Signed in with temporary account.   $userCredential");
-      } on FirebaseAuthException catch (e) {
-        switch (e.code) {
-          case "operation-not-allowed":
-            DebugPrint("Anonymous auth hasn't been enabled for this project.");
-            break;
-          default:
-            DebugPrint('Unknown error');
-        }
-      }
-    }
+
 
     return Scaffold(
       body: Padding(
@@ -50,13 +39,15 @@ class Login extends StatelessWidget {
                 ),
                 ElevatedButton(
                     onPressed: () async {
-                      DebugPrint( "+88" + phoneNumber.text);
+                      DebugPrint("+88" + phoneNumber.text);
                       await FirebaseAuth.instance.verifyPhoneNumber(
                         phoneNumber: "+88" + phoneNumber.text,
                         verificationCompleted: (PhoneAuthCredential credential) {},
                         verificationFailed: (FirebaseAuthException e) {},
                         codeSent: (String verificationId, int? resendToken) {
-                          
+                          Navigator.of(context).push(CupertinoPageRoute(
+                            builder: (_) => OTPScreen(verificationId: verificationId),
+                          ));
                         },
                         codeAutoRetrievalTimeout: (String verificationId) {},
                       );
@@ -64,23 +55,10 @@ class Login extends StatelessWidget {
                     child: Text(
                       'Send code',
                     )),
-                ElevatedButton(
-                    onPressed: null,
-                    child: Text(
-                      'Register',
-                    )),
+               
               ],
             ),
-            InkWell(
-              onTap: () => signInAnonymously(),
-              child: Text(
-                'Login Anonymously',
-                style: TextStyle(
-                  decoration: TextDecoration.underline,
-                ),
-              ),
-            )
-          ],
+          ]
         ),
       ),
     );
