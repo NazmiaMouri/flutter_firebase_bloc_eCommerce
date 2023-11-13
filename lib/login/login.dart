@@ -50,11 +50,14 @@ class Login extends StatelessWidget {
                 ),
                 ElevatedButton(
                     onPressed: () async {
+                      DebugPrint( "+88" + phoneNumber.text);
                       await FirebaseAuth.instance.verifyPhoneNumber(
                         phoneNumber: "+88" + phoneNumber.text,
                         verificationCompleted: (PhoneAuthCredential credential) {},
                         verificationFailed: (FirebaseAuthException e) {},
-                        codeSent: (String verificationId, int? resendToken) {},
+                        codeSent: (String verificationId, int? resendToken) {
+                          
+                        },
                         codeAutoRetrievalTimeout: (String verificationId) {},
                       );
                     },
