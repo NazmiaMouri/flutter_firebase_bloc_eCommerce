@@ -26,11 +26,11 @@ class LoginWithEmail extends StatelessWidget {
     final TextEditingController password = TextEditingController();
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            AspectRatio(
+            const AspectRatio(
               aspectRatio: 16 / 6,
               child: SizedBox(),
             ),
@@ -40,14 +40,14 @@ class LoginWithEmail extends StatelessWidget {
               children: [
                 TextField(
                   controller: email,
-                  decoration: InputDecoration(hintText: 'Enter your email'),
+                  decoration: const InputDecoration(hintText: 'Enter your email'),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 TextField(
                   controller: password,
-                  decoration: InputDecoration(hintText: 'Enter password'),
+                  decoration: const InputDecoration(hintText: 'Enter password'),
                 ),
                 ElevatedButton(
                     onPressed: () async {
@@ -65,20 +65,20 @@ class LoginWithEmail extends StatelessWidget {
                     child: const Text(
                       'Login',
                     )),
-                const ElevatedButton(
-                    onPressed: null,
-                    child: Text(
+                ElevatedButton(
+                    onPressed: () => Navigator.pushNamed(context, '/register'),
+                    child: const Text(
                       'Register',
                     )),
-                     InkWell(
-              onTap: () => Navigator.pushNamed(context, '/loginWithPhone'),
-              child: const Text(
-                'Forget password? Login with OTP',
-                style: TextStyle(
-                  decoration: TextDecoration.underline,
-                ),
-              ),
-            )
+                InkWell(
+                  onTap: () => Navigator.pushNamed(context, '/loginWithPhone'),
+                  child: const Text(
+                    'Forget password? Login with OTP',
+                    style: TextStyle(
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                )
               ],
             ),
             InkWell(

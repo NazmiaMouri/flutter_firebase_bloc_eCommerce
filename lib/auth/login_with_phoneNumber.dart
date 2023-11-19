@@ -20,7 +20,7 @@ class LoginWithPhoneNumber extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.all(10),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             AspectRatio(
               aspectRatio: 16 / 6,

@@ -5,6 +5,7 @@ import 'package:flutter_firebase_ecommerce/auth/login_with_email.dart';
 import 'package:flutter_firebase_ecommerce/auth/login_with_phoneNumber.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_firebase_ecommerce/auth/otp.dart';
+import 'package:flutter_firebase_ecommerce/auth/register.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -22,6 +23,7 @@ void main() async {
 final routes = {
   '/loginWithEmail': (context) => const LoginWithEmail(),
   '/loginWithPhone': (context) => const LoginWithPhoneNumber(),
+  '/register':(context) => const Register(),
 };
 
 class MyApp extends StatelessWidget {
@@ -43,6 +45,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: checkLoggedIn() ? Container() : LoginWithEmail());
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        routes: routes,
+        initialRoute:checkLoggedIn() ? 'Container()' : '/loginWithEmail' ,
+    );
   }
 }
