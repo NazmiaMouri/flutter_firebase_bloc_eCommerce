@@ -55,6 +55,7 @@ class LoginWithEmail extends StatelessWidget {
                         final credential = await FirebaseAuth.instance
                             .signInWithEmailAndPassword(email: email.text, password: password.text);
                       } on FirebaseAuthException catch (e) {
+                        DebugPrint(e.code);
                         if (e.code == 'user-not-found') {
                           print('No user found for that email.');
                         } else if (e.code == 'wrong-password') {
