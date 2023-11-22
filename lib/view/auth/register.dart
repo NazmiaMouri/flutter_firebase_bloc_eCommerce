@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_ecommerce/view/widgets/toast.dart';
 import 'package:tap_debouncer/tap_debouncer.dart';
-
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 class Register extends StatefulWidget {
   const Register({super.key});
 
@@ -10,6 +12,9 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
+  
   final TextEditingController userName = TextEditingController();
   final TextEditingController phoneNumber = TextEditingController();
   final TextEditingController email = TextEditingController();
@@ -47,16 +52,22 @@ class _RegisterState extends State<Register> {
             TapDebouncer(
               onTap: () async {
                 try {
-                  final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-                    email: email.text,
-                    password: password.text,
-                  );
-                  Navigator.pushNamed(context, '/loginWithEmail');
+                  if (password.text == confirmPassword.text) {
+                    final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                      email: email.text,
+                      password: password.text,
+                    );
+                     Navigator.pushNamed(context, '/loginWithEmail');
+                  } else {
+                    ShowToast.errorToast('Password and confirm password is not identical');
+                  }
+
+                 
                 } on FirebaseAuthException catch (e) {
                   if (e.code == 'weak-password') {
-                    print('The password provided is too weak.');
+                    ShowToast.errorToast('Password should be at least 6 characters');
                   } else if (e.code == 'email-already-in-use') {
-                    print('The account already exists for that email.');
+                    ShowToast.errorToast('The account already exists for that email.');
                   }
                 } catch (e) {
                   print(e);

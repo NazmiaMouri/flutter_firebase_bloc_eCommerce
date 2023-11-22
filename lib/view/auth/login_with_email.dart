@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase_ecommerce/widgets/debug_print.dart';
+import 'package:flutter_firebase_ecommerce/view/widgets/debug_print.dart';
+import 'package:flutter_firebase_ecommerce/view/widgets/toast.dart';
 
 class LoginWithEmail extends StatelessWidget {
   const LoginWithEmail({super.key});
@@ -54,12 +55,16 @@ class LoginWithEmail extends StatelessWidget {
                       try {
                         final credential = await FirebaseAuth.instance
                             .signInWithEmailAndPassword(email: email.text, password: password.text);
+
+                        Navigator.pushNamed(context, '/home');
                       } on FirebaseAuthException catch (e) {
                         DebugPrint(e.code);
                         if (e.code == 'user-not-found') {
-                          print('No user found for that email.');
+                          ShowToast.errorToast('No user found for that email.');
                         } else if (e.code == 'wrong-password') {
-                          print('Wrong password provided for that user.');
+                          ShowToast.errorToast('Wrong password provided for that user.');
+                        } else if (e.code == 'INVALID_LOGIN_CREDENTIALS') {
+                          ShowToast.errorToast('INVALID LOGIN CREDENTIALS');
                         }
                       }
                     },

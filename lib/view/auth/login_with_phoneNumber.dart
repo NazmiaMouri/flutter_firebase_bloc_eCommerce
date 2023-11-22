@@ -3,8 +3,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase_ecommerce/auth/otp.dart';
-import 'package:flutter_firebase_ecommerce/widgets/debug_print.dart';
+import 'package:flutter_firebase_ecommerce/view/auth/otp.dart';
+import 'package:flutter_firebase_ecommerce/view/widgets/debug_print.dart';
 
 class LoginWithPhoneNumber extends StatelessWidget {
   const LoginWithPhoneNumber({super.key});
