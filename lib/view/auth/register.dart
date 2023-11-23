@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_ecommerce/view/widgets/debug_print.dart';
 import 'package:flutter_firebase_ecommerce/view/widgets/toast.dart';
 import 'package:tap_debouncer/tap_debouncer.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -14,6 +15,12 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
 
   CollectionReference users = FirebaseFirestore.instance.collection('users');
+  FocusNode userNameNode=FocusNode();
+  FocusNode phoneNumberNode=FocusNode();
+  FocusNode emailNode=FocusNode();
+  FocusNode passwordNode=FocusNode();
+  FocusNode confirmPasswordNode=FocusNode();
+  FocusNode addressNode=FocusNode();
   
   final TextEditingController userName = TextEditingController();
   final TextEditingController phoneNumber = TextEditingController();
@@ -31,22 +38,27 @@ class _RegisterState extends State<Register> {
           children: [
             TextField(
               controller: userName,
+              focusNode: userNameNode,
               decoration: const InputDecoration(hintText: 'Enter your name'),
             ),
             TextField(
               controller: phoneNumber,
+              focusNode: phoneNumberNode,
               decoration: const InputDecoration(hintText: 'Enter your phone number'),
             ),
             TextField(
               controller: email,
+              focusNode: emailNode,
               decoration: const InputDecoration(hintText: 'Enter email'),
             ),
             TextField(
               controller: password,
+              focusNode: passwordNode,
               decoration: const InputDecoration(hintText: 'Enter password'),
             ),
             TextField(
               controller: confirmPassword,
+              focusNode: confirmPasswordNode,
               decoration: const InputDecoration(hintText: 'Confirm password'),
             ),
             TapDebouncer(
@@ -54,9 +66,11 @@ class _RegisterState extends State<Register> {
                 try {
                   if (password.text == confirmPassword.text) {
                     final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                      //  :userName.text,
                       email: email.text,
                       password: password.text,
                     );
+                    DebugPrint(credential);
                      Navigator.pushNamed(context, '/loginWithEmail');
                   } else {
                     ShowToast.errorToast('Password and confirm password is not identical');
