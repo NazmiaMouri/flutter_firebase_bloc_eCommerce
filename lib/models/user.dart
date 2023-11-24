@@ -4,5 +4,5 @@ class User {
   String? phoneNumber;
   String? address;
 
-  User(this.name, this.email, this.phoneNumber, this.address);
+  User({this.name, this.email, this.phoneNumber, this.address});
 }

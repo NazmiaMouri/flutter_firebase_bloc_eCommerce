@@ -1,10 +1,13 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_ecommerce/models/user.dart';
 import 'package:flutter_firebase_ecommerce/view/widgets/debug_print.dart';
 import 'package:flutter_firebase_ecommerce/view/widgets/toast.dart';
+import 'package:flutter_firebase_ecommerce/view_model/firebase/firebase_db.dart';
 import 'package:tap_debouncer/tap_debouncer.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Register extends StatefulWidget {
   const Register({super.key});
 
@@ -13,15 +16,14 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-
   CollectionReference users = FirebaseFirestore.instance.collection('users');
-  FocusNode userNameNode=FocusNode();
-  FocusNode phoneNumberNode=FocusNode();
-  FocusNode emailNode=FocusNode();
-  FocusNode passwordNode=FocusNode();
-  FocusNode confirmPasswordNode=FocusNode();
-  FocusNode addressNode=FocusNode();
-  
+  FocusNode userNameNode = FocusNode();
+  FocusNode phoneNumberNode = FocusNode();
+  FocusNode emailNode = FocusNode();
+  FocusNode passwordNode = FocusNode();
+  FocusNode confirmPasswordNode = FocusNode();
+  FocusNode addressNode = FocusNode();
+
   final TextEditingController userName = TextEditingController();
   final TextEditingController phoneNumber = TextEditingController();
   final TextEditingController email = TextEditingController();
@@ -44,7 +46,8 @@ class _RegisterState extends State<Register> {
             TextField(
               controller: phoneNumber,
               focusNode: phoneNumberNode,
-              decoration: const InputDecoration(hintText: 'Enter your phone number'),
+              decoration:
+                  const InputDecoration(hintText: 'Enter your phone number'),
             ),
             TextField(
               controller: email,
@@ -65,23 +68,32 @@ class _RegisterState extends State<Register> {
               onTap: () async {
                 try {
                   if (password.text == confirmPassword.text) {
-                    final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-                      //  :userName.text,
+                    final resp = await FirebaseAuth.instance
+                        .createUserWithEmailAndPassword(
                       email: email.text,
                       password: password.text,
                     );
-                    DebugPrint(credential);
-                     Navigator.pushNamed(context, '/loginWithEmail');
+                    User user = User(
+                      name: userName.text,
+                      email: email.text,
+                      phoneNumber: phoneNumber.text,
+                    );
+                    DebugPrint(resp);
+                    createUserCollection(user);
+                    
+                    if (!context.mounted) return;
+                    Navigator.pushNamed(context, '/loginWithEmail');
                   } else {
-                    ShowToast.errorToast('Password and confirm password is not identical');
+                    ShowToast.errorToast(
+                        'Password and confirm password is not identical');
                   }
-
-                 
                 } on FirebaseAuthException catch (e) {
                   if (e.code == 'weak-password') {
-                    ShowToast.errorToast('Password should be at least 6 characters');
+                    ShowToast.errorToast(
+                        'Password should be at least 6 characters');
                   } else if (e.code == 'email-already-in-use') {
-                    ShowToast.errorToast('The account already exists for that email.');
+                    ShowToast.errorToast(
+                        'The account already exists for that email.');
                   }
                 } catch (e) {
                   print(e);

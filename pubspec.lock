@@ -342,10 +342,5 @@ packages:
     source: hosted
     version: "0.3.0"
 sdks:
-<<<<<<< HEAD
-  dart: ">=3.0.0 <4.0.0"
-  flutter: ">=3.10.0"
-=======
   dart: ">=3.2.0-194.0.dev <4.0.0"
-  flutter: ">=3.7.0"
->>>>>>> 6e352ee (lock file changes)
+  flutter: ">=3.10.0"
