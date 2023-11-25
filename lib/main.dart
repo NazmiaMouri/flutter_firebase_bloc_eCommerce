@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_firebase_ecommerce/view/auth/otp.dart';
 import 'package:flutter_firebase_ecommerce/view/auth/register.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_firebase_ecommerce/view/home/home.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -22,16 +23,25 @@ void main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   bool checkLoggedIn() {
     bool loggedIn = false;
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
       if (user == null) {
-        loggedIn = false;
+        setState(() {
+          loggedIn = false;
+        });
       } else {
-        loggedIn = true;
+        setState(() {
+          loggedIn = true;
+        });
       }
     });
 
@@ -44,7 +54,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: namedRoutes,
-      initialRoute: checkLoggedIn() ? 'Container()' : '/loginWithEmail',
+      initialRoute: '/',
     );
   }
 }
