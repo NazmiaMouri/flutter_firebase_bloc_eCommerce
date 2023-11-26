@@ -54,7 +54,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: namedRoutes,
-      initialRoute: '/',
+      initialRoute: '/splash',
     );
   }
 }
