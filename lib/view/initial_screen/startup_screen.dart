@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_ecommerce/resources/colors.dart';
 import 'package:flutter_firebase_ecommerce/view/widgets/filled_button.dart';
 import 'package:flutter_firebase_ecommerce/view/widgets/outlined_button.dart';
+import 'package:flutter_firebase_ecommerce/view/widgets/font.dart';
 
 class StartUpScreen extends StatelessWidget {
   const StartUpScreen({super.key});
@@ -14,7 +16,7 @@ class StartUpScreen extends StatelessWidget {
             image: AssetImage("assets/images/lady_sewing.png"),
           )),
       child: Column(children: [
-        const Text('BRAND NAME'),
+         brandText(text:'BRAND NAME',style: TextStyle(color: brand, fontSize: 48, )),
         const SizedBox(
           height: 100,
         ),

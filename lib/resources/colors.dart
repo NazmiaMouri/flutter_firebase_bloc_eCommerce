@@ -7,3 +7,6 @@ const success = Color(0xff74b43b);
 const errorBackground= Color(0x33ed5959);
 const warningBackground = Color(0x33fdd54c);
 const successBackground = Color(0x3374b43b);
+
+const brand=Color(0xFFF1DADA);
+const brandTextolor=Color(0xFF8B7036);

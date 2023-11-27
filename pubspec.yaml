@@ -41,6 +41,7 @@ dependencies:
   tap_debouncer: ^2.2.0
   fluttertoast: ^8.2.4
   cloud_firestore: ^4.13.2
+  google_fonts: ^6.1.0
 
 dev_dependencies:
   flutter_test:
