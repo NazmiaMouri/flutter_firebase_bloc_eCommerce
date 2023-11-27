@@ -1,14 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase_ecommerce/routes/named_routes.dart';
-import 'package:flutter_firebase_ecommerce/view/auth/login_with_email.dart';
-import 'package:flutter_firebase_ecommerce/view/auth/login_with_phoneNumber.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_firebase_ecommerce/view/auth/otp.dart';
-import 'package:flutter_firebase_ecommerce/view/auth/register.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_firebase_ecommerce/view/home/home.dart';
+import 'package:flutter_firebase_ecommerce/routes/named_routes.dart';
+
 import 'firebase_options.dart';
 
 void main() async {
