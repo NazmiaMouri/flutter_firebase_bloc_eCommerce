@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_firebase_ecommerce/routes/named_routes.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'firebase_options.dart';
 
@@ -50,6 +51,9 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       routes: namedRoutes,
       initialRoute: '/splash',
+      theme: ThemeData(
+        scaffoldBackgroundColor: Colors.white,
+      ),
     );
   }
 }

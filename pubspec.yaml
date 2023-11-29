@@ -42,6 +42,7 @@ dependencies:
   fluttertoast: ^8.2.4
   cloud_firestore: ^4.13.2
   google_fonts: ^6.1.0
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:

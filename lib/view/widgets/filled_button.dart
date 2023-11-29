@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_ecommerce/view/widgets/font.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 Widget filledButton(
     {required BuildContext context,
     required buttonName,
     required Color buttonColour,
     required buttonAction,
-    double? height,
+    double? height, 
     double? width}) {
   return SizedBox(
     height: height ?? 50,
@@ -20,9 +22,9 @@ Widget filledButton(
             borderRadius: BorderRadius.circular(30.0),
           ),
         ),
-        child: Text(
-          buttonName,
-          style: TextStyle(fontSize: 18, color: Colors.white),
+        child: aText(
+          text:buttonName,
+          style:TextStyle(fontSize: 18, color: Colors.white) ,
         )),
   );
 }

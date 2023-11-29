@@ -3,37 +3,79 @@ import 'package:flutter_firebase_ecommerce/resources/colors.dart';
 import 'package:flutter_firebase_ecommerce/view/widgets/filled_button.dart';
 import 'package:flutter_firebase_ecommerce/view/widgets/outlined_button.dart';
 import 'package:flutter_firebase_ecommerce/view/widgets/font.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class StartUpScreen extends StatelessWidget {
   const StartUpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          color: Colors.white,
-          image: DecorationImage(
-            image: AssetImage("assets/images/lady_sewing.png"),
-          )),
-      child: Column(children: [
-         brandText(text:'BRAND NAME',style: TextStyle(color: brand, fontSize: 48, )),
-        const SizedBox(
-          height: 100,
+    return Scaffold(
+      body: Container(
+        padding: const EdgeInsets.all(10),
+        child: Center(
+          child: Column(children: [
+            const SizedBox(
+              height: 50,
+            ),
+            brandText(
+                text: 'Al - Maequl',
+                style: const TextStyle(
+                  color: brandTextolor,
+                  fontSize: 48,
+                )),
+            const SizedBox(
+              height: 50,
+            ),
+            Image.asset(
+              "assets/images/lady_sewing.png",
+              width: 280,
+              height: 320,
+            ),
+            Text('Fashion is not luxury anymore..',
+                style: GoogleFonts.allura(
+                  color: Colors.black,
+                  fontSize: 24,
+                )),
+            const SizedBox(
+              height: 50,
+            ),
+            outLinedButton(
+                context: context,
+                buttonName: 'Login',
+                buttonColour: Colors.black,
+                buttonAction: () =>
+                    Navigator.pushNamed(context, '/loginWithEmail')),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.25,
+                      child: const Divider(
+                        color: Colors.black,
+                      )),
+                  Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: aText(
+                        text: 'or',
+                        style: const TextStyle(fontSize: 18),
+                      )),
+                  SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.25,
+                      child: const Divider(color: Colors.black)),
+                ],
+              ),
+            ),
+            filledButton(
+                context: context,
+                buttonName: 'Register',
+                buttonColour: Colors.black,
+                buttonAction: () => Navigator.pushNamed(context, '/register'))
+          ]),
         ),
-        const Text(' Fashion is not luxury anymore '),
-        const SizedBox(
-          height: 30,
-        ),
-        const Text('Lower toxic world Lower toxic world Lower toxic world '),
-        const SizedBox(
-          height: 30,
-        ),
-        outLinedButton(context: context, buttonName: 'Login', buttonColour: Colors.black, buttonAction: ()),
-        const SizedBox(
-          height: 20,
-        ),
-        filledButton(context: context, buttonName: 'Register', buttonColour: Colors.black, buttonAction: ())
-      ]),
+      ),
     );
   }
 }
