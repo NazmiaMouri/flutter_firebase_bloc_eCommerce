@@ -58,8 +58,8 @@ class StartUpScreen extends StatelessWidget {
                       )),
                   Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: aText(
-                        text: 'or',
+                      child: Text(
+                         'or',
                         style: const TextStyle(fontSize: 18),
                       )),
                   SizedBox(

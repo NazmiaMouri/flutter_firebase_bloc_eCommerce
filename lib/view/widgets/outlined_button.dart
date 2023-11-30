@@ -22,8 +22,8 @@ Widget outLinedButton(
             borderRadius: BorderRadius.circular(30.0),
           ),
         ),
-        child: aText(
-          text: buttonName,
+        child: Text(
+           buttonName,
           style: TextStyle(fontSize: 18, color: buttonColour),
         )),
   );

@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_firebase_ecommerce/resources/colors.dart';
 import 'package:flutter_firebase_ecommerce/routes/named_routes.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -51,9 +52,27 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       routes: namedRoutes,
       initialRoute: '/splash',
-      theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white,
-      ),
+      theme: _buildTheme(context),
     );
   }
+}
+
+ThemeData _buildTheme(BuildContext context) {
+  return ThemeData(
+    useMaterial3: true,
+    scaffoldBackgroundColor: Colors.white,
+    textTheme: GoogleFonts.abhayaLibreTextTheme(
+      Theme.of(context).textTheme.copyWith(
+              titleMedium: const TextStyle(
+            fontSize: 13,
+            color: Colors.black
+          )),
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: const BorderSide(color: textInputBorder),
+      ),
+    ),
+  );
 }

@@ -10,3 +10,6 @@ const successBackground = Color(0x3374b43b);
 
 const brand=Color(0xFFF1DADA);
 const brandTextolor=Color(0xFF8B7036);
+
+const textInputBorder= Color.fromRGBO(0, 0, 0, 0.1);
+const textAsh= Color.fromRGBO(0, 0, 0, 0.7);

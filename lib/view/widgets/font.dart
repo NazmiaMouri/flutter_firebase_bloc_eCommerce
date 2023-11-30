@@ -8,9 +8,9 @@ Widget brandText({required String text, required TextStyle style}) {
   );
 }
 
-Widget aText({required String text, required TextStyle style}) {
-  return Text(text, style: GoogleFonts.abhayaLibre(textStyle: style..fontSize));
-}
+// Widget aText({required String text,  TextStyle? style}) {
+//   return Text(text, style: GoogleFonts.abhayaLibre(textStyle: style));
+// }
 
 Widget malabisCollectionText({required double fontSize}) {
   return Text(
