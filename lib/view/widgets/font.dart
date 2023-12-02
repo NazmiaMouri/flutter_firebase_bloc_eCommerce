@@ -12,13 +12,14 @@ Widget brandText({required String text, required TextStyle style}) {
 //   return Text(text, style: GoogleFonts.abhayaLibre(textStyle: style));
 // }
 
-Widget malabisCollectionText({required double fontSize}) {
+Widget malabisCollectionText(
+    {required double fontSize, double? letterSpacing}) {
   return Text(
     'MALABIS COLLECTION',
     style: GoogleFonts.arbutus(
         textStyle: TextStyle(
             color: Color(0xFFA49476),
-            letterSpacing: 5,
+            letterSpacing: letterSpacing ?? 5,
             fontSize: fontSize)),
   );
 }

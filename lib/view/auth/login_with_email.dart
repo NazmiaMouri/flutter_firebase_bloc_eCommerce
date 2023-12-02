@@ -155,27 +155,30 @@ class _LoginWithEmailState extends State<LoginWithEmail> {
                           context: context,
                           buttonName: 'Login',
                           buttonColour: Colors.black,
-                          buttonAction: () async {
-                            try {
-                              final credential = await FirebaseAuth.instance
-                                  .signInWithEmailAndPassword(email: email.text, password: password.text);
-                              if (!context.mounted) return;
-                              getUserDetail(email.text);
-                              Navigator.pushNamed(context, '/home');
-                            } on FirebaseAuthException catch (e) {
-                              DebugPrint(e.code);
-                              if (e.code == 'user-not-found') {
-                                ShowToast.errorToast('No user found for that email.');
-                              } else if (e.code == 'wrong-password') {
-                                ShowToast.errorToast('Wrong password provided for that user.');
-                              } else if (e.code == 'INVALID_LOGIN_CREDENTIALS') {
-                                ShowToast.errorToast('INVALID LOGIN CREDENTIALS');
-                              }
-                            }
-                          },
-                        ),
+                          buttonAction: ()=>Navigator.pushNamed(context,  '/home')
+                        )
+                        //   buttonAction: () async {
+                        //     try {
+                        //       final credential = await FirebaseAuth.instance
+                        //           .signInWithEmailAndPassword(email: email.text, password: password.text);
+                        //       if (!context.mounted) return;
+                        //       getUserDetail(email.text);
+                        //       Navigator.pushNamed(context, '/home');
+                        //     } on FirebaseAuthException catch (e) {
+                        //       DebugPrint(e.code);
+                        //       if (e.code == 'user-not-found') {
+                        //         ShowToast.errorToast('No user found for that email.');
+                        //       } else if (e.code == 'wrong-password') {
+                        //         ShowToast.errorToast('Wrong password provided for that user.');
+                        //       } else if (e.code == 'INVALID_LOGIN_CREDENTIALS') {
+                        //         ShowToast.errorToast('INVALID LOGIN CREDENTIALS');
+                        //       }
+                        //     }
+                        //   },
+                        // ),
                       ),
                     ),
+                    SizedBox(height: 10,),
                     Row(
                       children: [
                         Text(
