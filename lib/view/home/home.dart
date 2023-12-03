@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_ecommerce/resources/colors.dart';
 import 'package:flutter_firebase_ecommerce/view/widgets/circle_image.dart';
@@ -12,6 +11,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
         title: Container(
             height: 50,
@@ -29,21 +29,38 @@ class Home extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 2.0),
-                  child: brandText(
-                      text: 'Al - Maequl',
-                      style:
-                          const TextStyle(fontSize: 20, color: brandTextolor)),
+                  child: brandText(text: 'Al - Maequl', style: const TextStyle(fontSize: 20, color: brandTextolor)),
                 ),
                 malabisCollectionText(fontSize: 6, letterSpacing: 2),
               ],
             )),
-        actions: [
-          Icon(
-            Icons.notifications_outlined,
+        actions: const [
+          InkWell(
+            child: Icon(
+              Icons.notifications_outlined,
+            ),
+          ),
+          SizedBox(width: 10,),
+          InkWell(
+            child: Icon(
+              Icons.shopping_cart_outlined,
+            ),
+          ),
+           SizedBox(width: 10,),
+          InkWell(
+            child: Icon(
+              Icons.favorite_border_outlined,
+            ),
+          ),
+           SizedBox(width: 10,),
+          InkWell(
+            child: Icon(
+              Icons.search_outlined,
+            ),
           ),
         ],
       ),
-      drawer: Drawer(
+      endDrawer: Drawer(
           child: Column(
         children: [
           CircularImageWithBackground(
@@ -51,22 +68,19 @@ class Home extends StatelessWidget {
             width: 22,
             height: 22,
           ),
-          Text('name,'),
-          Text('voucher'),
-          Text('favourites'),
-          Text('Address'),
-          Text('Help center'),
-          Text('Settings'),
-          Text('terms and conditions'),
-          Text('logout')
+          const Text('name,'),
+          const Text('voucher'),
+          const Text('favourites'),
+          const Text('Address'),
+          const Text('Help center'),
+          const Text('Settings'),
+          const Text('terms and conditions'),
+          const Text('logout')
         ],
       )),
       body: Column(
         children: [
-          Container(
-              color: Colors.red,
-              child: SvgPicture.asset('assets/icons/ic_notification.svg',
-                  width: 50, height: 50)),
+         
           SvgPicture.asset('assets/icons/ic_notification.svg'),
         ],
       ),
