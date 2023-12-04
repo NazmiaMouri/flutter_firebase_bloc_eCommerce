@@ -51,7 +51,8 @@ class _LoginWithEmailState extends State<LoginWithEmail> {
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(10),
-            child: Column(
+            child: ListView(
+              shrinkWrap: true,
               children: [
                 Container(
                     height: 50,
