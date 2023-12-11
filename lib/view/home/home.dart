@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_ecommerce/resources/colors.dart';
+import 'package:flutter_firebase_ecommerce/view/home/drawer.dart';
 import 'package:flutter_firebase_ecommerce/view/tab_view/popular_items.dart';
 import 'package:flutter_firebase_ecommerce/view/widgets/circle_image.dart';
 import 'package:flutter_firebase_ecommerce/view/widgets/font.dart';
@@ -20,7 +21,7 @@ class Home extends StatelessWidget {
     }
 
     return DefaultTabController(
-      initialIndex: 1,
+      initialIndex: 0,
       length: 5,
       child: Scaffold(
         key: scaffoldKey,
@@ -106,25 +107,6 @@ class Home extends StatelessWidget {
             ),
           ],
         ),
-        endDrawer: Drawer(
-          child: Column(
-            children: [
-              CircularImageWithBackground(
-                foregroundImageURL: "https://i.imgur.com/OB0y6MR.jpg",
-                width: 22,
-                height: 22,
-              ),
-              const Text('name,'),
-              const Text('voucher'),
-              const Text('favourites'),
-              const Text('Address'),
-              const Text('Help center'),
-              const Text('Settings'),
-              const Text('terms and conditions'),
-              const Text('logout')
-            ],
-          ),
-        ),
         body: const TabBarView(
           children: [
             PopularItems(),
@@ -134,6 +116,7 @@ class Home extends StatelessWidget {
             Icon(Icons.directions_bike),
           ],
         ),
+        endDrawer: DrawerScreen(closeEndDrawer: closeEndDrawer)
       ),
     );
   }

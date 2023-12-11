@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 class CircularImageWithBackground extends StatelessWidget {
   CircularImageWithBackground({
     Key? key,
-    this.backgroundImageURL = 'lib/assets/images/desktop.png',
+    this.backgroundImageURL = 'assets/images/profile_pic.png',
     required this.foregroundImageURL,
-    this.width= 80,
-    this.height= 80,
+    this.width = 80,
+    this.height = 80,
   }) : super(key: key);
   String backgroundImageURL;
   String foregroundImageURL;
@@ -18,9 +18,11 @@ class CircularImageWithBackground extends StatelessWidget {
       height: height,
       width: width,
       decoration: BoxDecoration(
+        color: Colors.white,
         shape: BoxShape.circle,
         image: DecorationImage(
-          image: AssetImage(backgroundImageURL), // Replace with your background image path
+          image: AssetImage(
+              backgroundImageURL), // Replace with your background image path
           fit: BoxFit.cover,
         ),
       ),

@@ -1,4 +1,7 @@
 {
     "java.configuration.updateBuildConfiguration": "interactive",
-    "svg.preview.background": "transparent"
+    "svg.preview.background": "transparent",
+    "editor.codeActionsOnSave": {
+        "source.fixAll": "explicit"
+    }
 }
