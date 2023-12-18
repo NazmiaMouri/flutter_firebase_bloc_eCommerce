@@ -15,7 +15,7 @@ class DrawerScreen extends StatelessWidget {
       child: SafeArea(
         minimum: const EdgeInsets.all(15),
         child: Column(
-          mainAxisSize: MainAxisSize.max,
+          mainAxisSize: MainAxisSize.max,         
           children: [
              Align(
               alignment: Alignment.centerRight,

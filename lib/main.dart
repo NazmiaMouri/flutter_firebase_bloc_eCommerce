@@ -61,12 +61,10 @@ ThemeData _buildTheme(BuildContext context) {
   return ThemeData(
     useMaterial3: true,
     scaffoldBackgroundColor: Colors.white,
+    colorSchemeSeed: brand,
     textTheme: GoogleFonts.abhayaLibreTextTheme(
       Theme.of(context).textTheme.copyWith(
-              titleMedium: const TextStyle(
-            fontSize: 13,
-            color: Colors.black
-          )),
+          titleMedium: const TextStyle(fontSize: 13, color: Colors.black)),
     ),
     inputDecorationTheme: InputDecorationTheme(
       enabledBorder: OutlineInputBorder(

@@ -4,6 +4,7 @@ import 'package:flutter_firebase_ecommerce/view/auth/register.dart';
 import 'package:flutter_firebase_ecommerce/view/home/home.dart';
 import 'package:flutter_firebase_ecommerce/view/initial_screen/splash_screen.dart';
 import 'package:flutter_firebase_ecommerce/view/initial_screen/startup_screen.dart';
+import 'package:flutter_firebase_ecommerce/view/product_details/product_details.dart';
 
 final namedRoutes = {
   '/splash': (context) => const SplashScreen(),
@@ -12,4 +13,5 @@ final namedRoutes = {
   '/loginWithPhone': (context) => const LoginWithPhoneNumber(),
   '/register': (context) => const Register(),
   '/home': (context) => const Home(),
+  '/productDetail':(context) => const ViewProductDetail()
 };

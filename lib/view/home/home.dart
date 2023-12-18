@@ -24,100 +24,102 @@ class Home extends StatelessWidget {
       initialIndex: 0,
       length: 5,
       child: Scaffold(
-        key: scaffoldKey,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          automaticallyImplyLeading: false,
-          title: Container(
-            height: 50,
-            width: 120,
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-              fit: BoxFit.fill,
-              image: AssetImage(
-                'assets/images/needle.png',
-              ),
-            )),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 2.0),
-                  child: brandText(text: 'Al - Maequl', style: const TextStyle(fontSize: 20, color: brandTextolor)),
+          key: scaffoldKey,
+          appBar: AppBar(
+            backgroundColor: Colors.white,
+            automaticallyImplyLeading: false,
+            title: Container(
+              height: 50,
+              width: 120,
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                fit: BoxFit.fill,
+                image: AssetImage(
+                  'assets/images/needle.png',
                 ),
-                malabisCollectionText(fontSize: 6, letterSpacing: 2),
+              )),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 2.0),
+                    child: brandText(
+                        text: 'Al - Maequl',
+                        style: const TextStyle(
+                            fontSize: 20, color: brandTextolor)),
+                  ),
+                  malabisCollectionText(fontSize: 6, letterSpacing: 2),
+                ],
+              ),
+            ),
+            actions: [
+              const InkWell(
+                child: Padding(
+                  padding: EdgeInsets.only(right: 20.0),
+                  child: Icon(
+                    Icons.notifications_outlined,
+                  ),
+                ),
+              ),
+              const InkWell(
+                child: Padding(
+                  padding: EdgeInsets.only(right: 20.0),
+                  child: Icon(
+                    Icons.shopping_cart_outlined,
+                  ),
+                ),
+              ),
+              const InkWell(
+                child: Padding(
+                  padding: EdgeInsets.only(right: 20.0),
+                  child: Icon(
+                    Icons.favorite_border_outlined,
+                  ),
+                ),
+              ),
+              const InkWell(
+                child: Padding(
+                  padding: EdgeInsets.only(right: 20.0),
+                  child: Icon(
+                    Icons.search_outlined,
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: () => openEndDrawer(),
+                child: const Padding(
+                  padding: EdgeInsets.only(right: 20.0),
+                  child: Icon(
+                    Icons.menu_outlined,
+                  ),
+                ),
+              ),
+            ],
+            bottom: const TabBar(
+              labelColor: tabBar,
+              indicatorColor: tabBar,
+              tabs: [
+                Tab(
+                  text: 'Popular',
+                ),
+                Tab(text: 'Kurti'),
+                Tab(text: 'Suit'),
+                Tab(text: 'Pant'),
+                Tab(text: 'Offer'),
               ],
             ),
           ),
-          bottom: const TabBar(
-            labelColor: tabBar,
-            indicatorColor: tabBar,
-            tabs: [
-              Tab(
-                text: 'Popular',
-              ),
-              Tab(text: 'Kurti'),
-              Tab(text: 'Suit'),
-              Tab(text: 'Pant'),
-              Tab(text: 'Offer'),
+          body: const TabBarView(
+            children: [
+              PopularItems(),
+              Icon(Icons.directions_transit),
+              Icon(Icons.directions_bike),
+              Icon(Icons.directions_transit),
+              Icon(Icons.directions_bike),
             ],
           ),
-          actions: [
-            const InkWell(
-              child: Padding(
-                padding: EdgeInsets.only(right: 20.0),
-                child: Icon(
-                  Icons.notifications_outlined,
-                ),
-              ),
-            ),
-            const InkWell(
-              child: Padding(
-                padding: EdgeInsets.only(right: 20.0),
-                child: Icon(
-                  Icons.shopping_cart_outlined,
-                ),
-              ),
-            ),
-            const InkWell(
-              child: Padding(
-                padding: EdgeInsets.only(right: 20.0),
-                child: Icon(
-                  Icons.favorite_border_outlined,
-                ),
-              ),
-            ),
-            const InkWell(
-              child: Padding(
-                padding: EdgeInsets.only(right: 20.0),
-                child: Icon(
-                  Icons.search_outlined,
-                ),
-              ),
-            ),
-            InkWell(
-              onTap: () => openEndDrawer(),
-              child: const Padding(
-                padding: EdgeInsets.only(right: 20.0),
-                child: Icon(
-                  Icons.menu_outlined,
-                ),
-              ),
-            ),
-          ],
-        ),
-        body: const TabBarView(
-          children: [
-            PopularItems(),
-            Icon(Icons.directions_transit),
-            Icon(Icons.directions_bike),
-            Icon(Icons.directions_transit),
-            Icon(Icons.directions_bike),
-          ],
-        ),
-        endDrawer: DrawerScreen(closeEndDrawer: closeEndDrawer)
-      ),
+          endDrawer: DrawerScreen(closeEndDrawer: closeEndDrawer)),
     );
   }
 }

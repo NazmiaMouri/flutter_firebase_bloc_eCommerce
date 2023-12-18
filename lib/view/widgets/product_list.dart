@@ -11,7 +11,9 @@ class ProductList extends StatelessWidget {
             const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 5, mainAxisSpacing: 5,
             childAspectRatio: .7),
         itemBuilder: (_, int index) {
-          return Product();
+          return InkWell(
+            onTap: ()=> Navigator.pushNamed(context, '/productDetail'),
+            child: Product());
         });
   }
 }
