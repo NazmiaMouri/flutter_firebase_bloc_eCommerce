@@ -4,7 +4,7 @@ import 'package:flutter_firebase_ecommerce/view/widgets/circle_image.dart';
 import 'package:flutter_firebase_ecommerce/view/widgets/list_tile.dart';
 
 class DrawerScreen extends StatelessWidget {
-  const DrawerScreen({ required this.closeEndDrawer,super.key});
+  const DrawerScreen({required this.closeEndDrawer, super.key});
 
   final Function closeEndDrawer;
 
@@ -15,14 +15,14 @@ class DrawerScreen extends StatelessWidget {
       child: SafeArea(
         minimum: const EdgeInsets.all(15),
         child: Column(
-          mainAxisSize: MainAxisSize.max,         
+          mainAxisSize: MainAxisSize.max,
           children: [
-             Align(
+            Align(
               alignment: Alignment.centerRight,
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20.0),
                 child: InkWell(
-                  onTap: ()=>closeEndDrawer(),
+                  onTap: () => closeEndDrawer(),
                   child: const Icon(
                     Icons.close_outlined,
                   ),
@@ -47,9 +47,10 @@ class DrawerScreen extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            drawerItems(Icons.shopping_basket_outlined, 'Orders', () => {}),
-            drawerItems(Icons.favorite_border_outlined, 'Wishlist', () => {}),
-            drawerItems(Icons.place_outlined, 'Delivery Address', () => {}),
+            drawerItems(Icons.shopping_basket_outlined, 'Orders',
+                () => {Navigator.pushNamed(context, '/order')}),
+            drawerItems(Icons.favorite_border_outlined, 'Wishlist', () => {Navigator.pushNamed(context, '/wishlist')}),
+            drawerItems(Icons.place_outlined, 'Delivery Address', () => {Navigator.pushNamed(context, '/address')}),
             drawerItems(Icons.payment_outlined, 'Payment Methods', () => {}),
             drawerItems(Icons.sell_outlined, 'Promo Card', () => {}),
             drawerItems(
@@ -70,6 +71,7 @@ class DrawerScreen extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20.0),
       child: InkWell(
+        onTap: () => itemAction(),
         child: Row(
           children: [Icon(iconName), const SizedBox(width: 20), Text(itemName)],
         ),

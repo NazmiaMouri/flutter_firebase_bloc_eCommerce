@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_ecommerce/models/dress.dart';
+import 'package:flutter_firebase_ecommerce/repository/product_repository.dart';
 import 'package:flutter_firebase_ecommerce/resources/colors.dart';
 
 class Product extends StatelessWidget {
-  const Product({super.key});
+  final Dress dress;
+  const Product({super.key, required this.dress});
 
   @override
   Widget build(BuildContext context) {
@@ -14,13 +17,13 @@ class Product extends StatelessWidget {
           width: double.infinity,
           color: brand,
         ),
-        const Padding(
+        Padding(
           padding: EdgeInsets.symmetric(horizontal: 8.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('name'),
-              InkWell(
+              Text(dress.title!),
+              const InkWell(
                 child: Icon(
                   Icons.favorite_border_outlined,
                 ),
@@ -28,9 +31,9 @@ class Product extends StatelessWidget {
             ],
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8.0),
-          child: Text('Price'),
+        Padding(
+          padding:const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Text(dress.price!),
         )
       ],
     );
