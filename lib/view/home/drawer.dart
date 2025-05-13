@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_ecommerce/repository/auth_repository.dart';
 import 'package:flutter_firebase_ecommerce/resources/colors.dart';
 import 'package:flutter_firebase_ecommerce/view/widgets/circle_image.dart';
 import 'package:flutter_firebase_ecommerce/view/widgets/list_tile.dart';
@@ -49,8 +50,10 @@ class DrawerScreen extends StatelessWidget {
             ),
             drawerItems(Icons.shopping_basket_outlined, 'Orders',
                 () => {Navigator.pushNamed(context, '/order')}),
-            drawerItems(Icons.favorite_border_outlined, 'Wishlist', () => {Navigator.pushNamed(context, '/wishlist')}),
-            drawerItems(Icons.place_outlined, 'Delivery Address', () => {Navigator.pushNamed(context, '/address')}),
+            drawerItems(Icons.favorite_border_outlined, 'Wishlist',
+                () => {Navigator.pushNamed(context, '/wishlist')}),
+            drawerItems(Icons.place_outlined, 'Delivery Address',
+                () => {Navigator.pushNamed(context, '/address')}),
             drawerItems(Icons.payment_outlined, 'Payment Methods', () => {}),
             drawerItems(Icons.sell_outlined, 'Promo Card', () => {}),
             drawerItems(
@@ -60,7 +63,13 @@ class DrawerScreen extends StatelessWidget {
 
             const Spacer(), // <-- This will fill up any free-space
             // Everything from here down is bottom aligned in the drawer
-            drawerItems(Icons.logout_outlined, 'LOG OUT', () => {}),
+            drawerItems(
+                Icons.logout_outlined,
+                'LOG OUT',
+                () => {
+                      authRepo.logout().then((value) =>
+                          Navigator.pushNamed(context, '/loginWithEmail')),
+                    }),
           ],
         ),
       ),

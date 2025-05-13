@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_firebase_ecommerce/network/cookie_manager.dart';
 
 class HeaderRequestTime {
   static Dio? _headerRequestTime;
@@ -9,7 +10,8 @@ class HeaderRequestTime {
       ..options.contentType = Headers.jsonContentType
       ..options.headers[Headers.acceptHeader] =
           'application/json, text/plain, */*'
-      ..options.connectTimeout = const Duration(seconds: 300);
+      ..options.connectTimeout = const Duration(seconds: 300)
+      ..interceptors.add(CookieManager.instance);
 
     if (kDebugMode) {
       dio.interceptors.add(LogInterceptor(

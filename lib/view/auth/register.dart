@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_ecommerce/models/user.dart';
+import 'package:flutter_firebase_ecommerce/repository/auth_repository.dart';
 import 'package:flutter_firebase_ecommerce/resources/colors.dart';
 import 'package:flutter_firebase_ecommerce/view/widgets/debug_print.dart';
 import 'package:flutter_firebase_ecommerce/view/widgets/filled_button.dart';
@@ -33,6 +34,7 @@ class _RegisterState extends State<Register> {
   final TextEditingController password = TextEditingController();
   final TextEditingController confirmPassword = TextEditingController();
   final TextEditingController address = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +42,7 @@ class _RegisterState extends State<Register> {
         backgroundColor: brand,
       ),
       body: ListView(
-        padding: EdgeInsets.only(bottom:10),
+        padding: EdgeInsets.only(bottom: 10),
         shrinkWrap: true,
         children: [
           Container(
@@ -59,7 +61,7 @@ class _RegisterState extends State<Register> {
                         "Get's started with",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(width:10),
+                      SizedBox(width: 10),
                       Container(
                           height: 50,
                           decoration: const BoxDecoration(
@@ -179,18 +181,25 @@ class _RegisterState extends State<Register> {
                 onTap: () async {
                   try {
                     if (password.text == confirmPassword.text) {
-                      final resp = await FirebaseAuth.instance
-                          .createUserWithEmailAndPassword(
-                        email: email.text,
-                        password: password.text,
-                      );
+                      // final resp = await FirebaseAuth.instance
+                      //     .createUserWithEmailAndPassword(
+                      //   email: email.text,
+                      //   password: password.text,
+                      // );
+                      // User user = User(
+                      //   name: userName.text,
+                      //   email: email.text,
+                      //   phoneNumber: phoneNumber.text,
+                      // );
+                      // DebugPrint(resp);
+                      // createUserCollection(user);
                       User user = User(
-                        name: userName.text,
-                        email: email.text,
-                        phoneNumber: phoneNumber.text,
-                      );
-                      DebugPrint(resp);
-                      createUserCollection(user);
+                          name: userName.text,
+                          email: email.text,
+                          phoneNumber: phoneNumber.text,
+                          password: password.text);
+
+                      authRepo.signUp(user);
 
                       if (!context.mounted) return;
                       Navigator.pushNamed(context, '/loginWithEmail');
@@ -218,7 +227,6 @@ class _RegisterState extends State<Register> {
                       buttonAction: onTap);
                 },
               ),
-             
             ],
           )
         ],

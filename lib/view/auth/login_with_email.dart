@@ -1,7 +1,9 @@
-
+import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_ecommerce/models/auth_request.dart';
+import 'package:flutter_firebase_ecommerce/repository/auth_repository.dart';
 import 'package:flutter_firebase_ecommerce/resources/colors.dart';
 import 'package:flutter_firebase_ecommerce/view/widgets/debug_print.dart';
 import 'package:flutter_firebase_ecommerce/view/widgets/filled_button.dart';
@@ -19,6 +21,10 @@ class LoginWithEmail extends StatefulWidget {
 
 class _LoginWithEmailState extends State<LoginWithEmail> {
   bool isChecked = false;
+  final TextEditingController email = TextEditingController();
+  final TextEditingController password = TextEditingController();
+  FocusNode emailNode = FocusNode();
+  FocusNode passwordNode = FocusNode();
   void signInAnonymously() async {
     try {
       final userCredential = await FirebaseAuth.instance.signInAnonymously();
@@ -36,8 +42,6 @@ class _LoginWithEmailState extends State<LoginWithEmail> {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController email = TextEditingController();
-    final TextEditingController password = TextEditingController();
     List<String> images = [
       'assets/images/lime_blue_blur.png',
       'assets/images/masterd_blue_blur.png',
@@ -68,7 +72,10 @@ class _LoginWithEmailState extends State<LoginWithEmail> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(left: 2.0),
-                          child: brandText(text: 'Al - Maequl', style: TextStyle(fontSize: 24, color: brandTextolor)),
+                          child: brandText(
+                              text: 'Al - Maequl',
+                              style: TextStyle(
+                                  fontSize: 24, color: brandTextolor)),
                         ),
                         malabisCollectionText(fontSize: 8)
                       ],
@@ -106,9 +113,10 @@ class _LoginWithEmailState extends State<LoginWithEmail> {
                     ),
                     TextField(
                       controller: email,
-                      // decoration: InputDecoration(
-                      //     hintText: 'Enter your email',
-                      //    ),
+                      focusNode: emailNode,
+                      decoration: InputDecoration(
+                        hintText: 'Enter your email',
+                      ),
                     ),
                     const SizedBox(
                       height: 10,
@@ -121,7 +129,9 @@ class _LoginWithEmailState extends State<LoginWithEmail> {
                     ),
                     TextField(
                       controller: password,
-                      // decoration: const InputDecoration(hintText: 'Enter password'),
+                      focusNode: passwordNode,
+                      decoration:
+                          const InputDecoration(hintText: 'Enter password'),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -151,35 +161,45 @@ class _LoginWithEmailState extends State<LoginWithEmail> {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: SizedBox(
-                        width: double.infinity,
-                        child: filledButton(
-                          context: context,
-                          buttonName: 'Login',
-                          buttonColour: Colors.black,
-                          buttonAction: ()=>Navigator.pushNamed(context,  '/home')
-                        )
-                        //   buttonAction: () async {
-                        //     try {
-                        //       final credential = await FirebaseAuth.instance
-                        //           .signInWithEmailAndPassword(email: email.text, password: password.text);
-                        //       if (!context.mounted) return;
-                        //       getUserDetail(email.text);
-                        //       Navigator.pushNamed(context, '/home');
-                        //     } on FirebaseAuthException catch (e) {
-                        //       DebugPrint(e.code);
-                        //       if (e.code == 'user-not-found') {
-                        //         ShowToast.errorToast('No user found for that email.');
-                        //       } else if (e.code == 'wrong-password') {
-                        //         ShowToast.errorToast('Wrong password provided for that user.');
-                        //       } else if (e.code == 'INVALID_LOGIN_CREDENTIALS') {
-                        //         ShowToast.errorToast('INVALID LOGIN CREDENTIALS');
-                        //       }
-                        //     }
-                        //   },
-                        // ),
-                      ),
+                          width: double.infinity,
+                          child: filledButton(
+                              context: context,
+                              buttonName: 'Login',
+                              buttonColour: Colors.black,
+                              buttonAction: () {
+                                LoginRequest loginRequest = LoginRequest(
+                                    email: email.text, password: password.text);
+                                authRepo.login(loginRequest).then((value) {
+                                  var data = jsonDecode(value);
+                                  print(data);
+                                  if (data['user'] != null) {
+                                    Navigator.pushNamed(context, '/home');
+                                  }
+                                });
+                                //   buttonAction: () async {
+                                //     try {
+                                //       final credential = await FirebaseAuth.instance
+                                //           .signInWithEmailAndPassword(email: email.text, password: password.text);
+                                //       if (!context.mounted) return;
+                                //       getUserDetail(email.text);
+                                //       Navigator.pushNamed(context, '/home');
+                                //     } on FirebaseAuthException catch (e) {
+                                //       DebugPrint(e.code);
+                                //       if (e.code == 'user-not-found') {
+                                //         ShowToast.errorToast('No user found for that email.');
+                                //       } else if (e.code == 'wrong-password') {
+                                //         ShowToast.errorToast('Wrong password provided for that user.');
+                                //       } else if (e.code == 'INVALID_LOGIN_CREDENTIALS') {
+                                //         ShowToast.errorToast('INVALID LOGIN CREDENTIALS');
+                                //       }
+                                //     }
+                                //   },
+                                // ),
+                              })),
                     ),
-                    SizedBox(height: 10,),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Row(
                       children: [
                         Text(
@@ -187,11 +207,11 @@ class _LoginWithEmailState extends State<LoginWithEmail> {
                           style: TextStyle(color: textAsh),
                         ),
                         InkWell(
-                            onTap: () => Navigator.pushNamed(context, '/register'),
+                            onTap: () =>
+                                Navigator.pushNamed(context, '/register'),
                             child: Text('Create an account',
                                 style: TextStyle(
                                   decoration: TextDecoration.underline,
-                                  
                                 )))
                       ],
                     ),
