@@ -1,3 +1,5 @@
+import 'package:dio/dio.dart';
+import 'package:flutter_firebase_ecommerce/models/api_response.dart';
 import 'package:flutter_firebase_ecommerce/models/auth_request.dart';
 import 'package:flutter_firebase_ecommerce/models/dress.dart';
 import 'package:flutter_firebase_ecommerce/models/user.dart';
@@ -16,15 +18,15 @@ class AuthRepository {
     _apiRequest = RestClient(HeaderRequestTime.instance);
   }
 
-  Future<User> auth() {
+  Future<ApiResponse<User>> auth() {
     return _apiRequest.auth();
   }
 
-  Future<void> signUp(User user) {
+  Future<ApiResponse<User>> signUp(User user) {
     return _apiRequest.signUp(user);
   }
 
-  Future<String> login(LoginRequest loginRequest) {
+  Future<ApiResponse<User>> login(LoginRequest loginRequest) {
     return _apiRequest.login(loginRequest);
   }
 

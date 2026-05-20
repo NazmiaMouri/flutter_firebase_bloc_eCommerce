@@ -28,14 +28,13 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     print('Checking for existing session...');
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? cookie = prefs.getString('cookie');
+    print('Cookie found: $cookie'); 
+    print(cookie);
     if (cookie != null) {
       authRepo.auth().then((res) {
-        var data = res;
-        print('Auth Result:');
-        print(res);
-        print(jsonEncode(data));
-        if (data.email != null) {
-          ref.read(userProvider.notifier).setUser(data);
+      
+        if (res.data!.email != null) {
+          ref.read(userProvider.notifier).setUser(res.data!);
           context.go('/home');
         } else {
           context.go('/startup');

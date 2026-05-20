@@ -15,11 +15,11 @@ class OrdersPage extends ConsumerWidget {
     return ordersAsync.when(
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (err, _) => Center(child: Text(err.toString())),
-      data: (orders) {
+      data: (response) {
         return ListView.builder(
-          itemCount: orders.length,
+          itemCount: response.data!.length,
           itemBuilder: (context, index) {
-            final order = orders[index];
+            final order = response.data![index];
             return orderTile(
               orderId: order.orderId ?? '',
               products: order.products ?? [],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_ecommerce/models/api_response.dart';
 import 'package:flutter_firebase_ecommerce/models/dress.dart';
 import 'package:flutter_firebase_ecommerce/repository/product_repository.dart';
 import 'package:flutter_firebase_ecommerce/view/widgets/product_tile.dart';
@@ -18,18 +19,23 @@ class _ProductListState extends State<ProductList> {
     return FutureBuilder(
         future: productRepo.getAllDress(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
+          print('Snapshot: $snapshot');
           if (!snapshot.hasData) {
+            print('snapshot.data   ${snapshot.data}');
             return const SpinKitRotatingCircle(
-              color: Colors.white,
+              color: Colors.blueAccent,
               size: 50.0,
             );
-          } else if (snapshot.hasError || snapshot.data.isEmpty) {
+          } else if (snapshot.hasError) {
             return const SpinKitRotatingCircle(
-              color: Colors.white,
+              color: Colors.redAccent,
               size: 50.0,
             );
           } else {
-            final List<Dress> dresses = snapshot.data;
+            final result = snapshot.data;
+            final dresses = result?.data ?? [];
+            print('Dresses fetched: ${dresses.length}');
+            print(dresses.length);
             return GridView.builder(
                 itemCount: dresses.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

@@ -1,9 +1,14 @@
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_firebase_ecommerce/models/api_response.dart';
 import 'package:flutter_firebase_ecommerce/models/cart.dart';
 import 'package:flutter_firebase_ecommerce/models/dress.dart';
 import 'package:flutter_firebase_ecommerce/models/order.dart';
 import 'package:flutter_firebase_ecommerce/network/api_client.dart';
 import 'package:flutter_firebase_ecommerce/network/header_requesttime.dart';
-import 'package:retrofit/retrofit.dart';
+import 'package:flutter_firebase_ecommerce/models/user.dart'as UserModel;
+
 
 class OrderRepository {
   late RestClient _apiRequest;
@@ -13,23 +18,23 @@ class OrderRepository {
     //because i declare the header, content type, request time out under this singleton class.
     _apiRequest = RestClient(HeaderRequestTime.instance);
   }
-  Future<List<Cart>> getCartItems() {
+  Future<ApiResponse<List<Cart>>> getCartItems() {
     return _apiRequest.getCartItems();
   }
 
-  Future<void> addCartItem(Cart cartItem) {
+  Future<ApiResponse<Cart>> addCartItem(Cart cartItem) {
     return _apiRequest.addCartItem(cartItem);
   }
 
-  Future<void> deleteCartItem(Cart cartItem) {
+  Future<ApiResponse<UserModel.User>> deleteCartItem(Cart cartItem) {
     return _apiRequest.deleteCartItem(cartItem);
   }
 
-  Future<void> createOrder(OrderDetails order) {
+  Future<ApiResponse<OrderDetails>> createOrder(OrderDetails order) {
     return _apiRequest.createOrder(order);
   }
 
-  Future<List<OrderDetails>> getOrders() {
+  Future<ApiResponse<List<OrderDetails>>> getOrders() {
     return _apiRequest.getOrders();
   }
 }

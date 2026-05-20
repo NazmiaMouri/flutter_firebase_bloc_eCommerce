@@ -1,7 +1,11 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_ecommerce/models/user.dart';
+import 'package:flutter_firebase_ecommerce/providers/user_provider.dart';
 import 'package:flutter_firebase_ecommerce/repository/auth_repository.dart';
 import 'package:flutter_firebase_ecommerce/resources/colors.dart';
 import 'package:flutter_firebase_ecommerce/view/widgets/debug_print.dart';
@@ -12,15 +16,16 @@ import 'package:flutter_firebase_ecommerce/view_model/firebase/firebase_db.dart'
 import 'package:go_router/go_router.dart';
 import 'package:tap_debouncer/tap_debouncer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_firebase_ecommerce/models/user.dart' as UserModel;
 
-class Register extends StatefulWidget {
+class Register extends ConsumerStatefulWidget {
   const Register({super.key});
 
   @override
-  State<Register> createState() => _RegisterState();
+  ConsumerState<Register> createState() => _RegisterState();
 }
 
-class _RegisterState extends State<Register> {
+class _RegisterState extends ConsumerState<Register> {
   FocusNode userNameNode = FocusNode();
   FocusNode phoneNumberNode = FocusNode();
   FocusNode emailNode = FocusNode();
@@ -94,8 +99,7 @@ class _RegisterState extends State<Register> {
                         style: TextStyle(color: textAsh),
                       ),
                       InkWell(
-                          onTap: () =>
-                          context.go('/loginWithEmail'),
+                          onTap: () => context.go('/loginWithEmail'),
                           child: Text('Log in',
                               style: TextStyle(
                                 decoration: TextDecoration.underline,
@@ -199,15 +203,22 @@ class _RegisterState extends State<Register> {
                           phoneNumber: phoneNumber.text,
                           password: password.text);
 
-                      authRepo.signUp(user);
-
-                      if (!context.mounted) return;
-                      context.go('/loginWithEmail');
+                      authRepo.signUp(user).then((result) {
+                        if (!context.mounted) return;
+                       
+                        // print(result.statusCode);
+                        // if (data.id != null) {
+                        //   ref.read(userProvider.notifier).setUser(data);
+                        //   context.go('/home');
+                        // } else {
+                        //   ShowToast.errorToast('Registration failed');
+                        // }
+                      });
                     } else {
                       ShowToast.errorToast(
                           'Password and confirm password is not identical');
                     }
-                  }catch (e) {
+                  } catch (e) {
                     ShowToast.errorToast(e.toString());
                   }
                 }, // your tap handler moved here
@@ -219,7 +230,7 @@ class _RegisterState extends State<Register> {
                       buttonAction: onTap);
                 },
               ),
-            ],
+            ], 
           )
         ],
       ),

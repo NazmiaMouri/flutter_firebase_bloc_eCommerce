@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_ecommerce/models/api_response.dart';
 import 'package:flutter_firebase_ecommerce/models/auth_request.dart';
 import 'package:flutter_firebase_ecommerce/models/user.dart' as UserModel;
 import 'package:flutter_firebase_ecommerce/providers/user_provider.dart';
@@ -29,7 +30,6 @@ class _LoginWithEmailState extends ConsumerState<LoginWithEmail> {
   final TextEditingController password = TextEditingController();
   FocusNode emailNode = FocusNode();
   FocusNode passwordNode = FocusNode();
- 
 
   @override
   Widget build(BuildContext context) {
@@ -160,15 +160,21 @@ class _LoginWithEmailState extends ConsumerState<LoginWithEmail> {
                               buttonAction: () {
                                 LoginRequest loginRequest = LoginRequest(
                                     email: email.text, password: password.text);
-                                authRepo.login(loginRequest).then((value) {
-                                  UserModel.User data = UserModel.User.fromJson(jsonDecode(value));
-                                  print(data);
-                                  if (data.id != null) {
-                                    ref.read(userProvider.notifier).setUser(data);
+                                authRepo.login(loginRequest).then((result) {
+                                  
+
+                                  if (result.statusCode == 200 &&
+                                      result.data != null) {
+                                    UserModel.User user = result.data!;
+                                    ref
+                                        .read(userProvider.notifier)
+                                        .setUser(user);
+                                    print('before');
                                     context.go('/home');
+                                    print('after');
                                   }
                                 });
-                                                              })),
+                              })),
                     ),
                     SizedBox(
                       height: 10,

@@ -1,3 +1,5 @@
+import 'package:dio/dio.dart';
+import 'package:flutter_firebase_ecommerce/models/api_response.dart';
 import 'package:flutter_firebase_ecommerce/models/dress.dart';
 import 'package:flutter_firebase_ecommerce/network/api_client.dart';
 import 'package:flutter_firebase_ecommerce/network/header_requesttime.dart';
@@ -11,7 +13,7 @@ class ProductRepository {
     //because i declare the header, content type, request time out under this singleton class.
     _apiRequest = RestClient(HeaderRequestTime.instance);
   }
-  Future<List<Dress>> getAllDress() {
+  Future<ApiResponse<List<Dress>>> getAllDress() {
     return _apiRequest.getAllDress();
   }
 

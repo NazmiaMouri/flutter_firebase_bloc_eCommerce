@@ -19,7 +19,7 @@ class CookieManager extends Interceptor {
         print('=================================Cookie: $cookie');
         _saveCookie(cookie);
       }
-    } else if (response.statusCode == 401) {
+    } else if (response.statusCode == 401) { //when UNAUTHORIZED cookie clear
       clearCookie();
     }
     super.onResponse(response, handler);
